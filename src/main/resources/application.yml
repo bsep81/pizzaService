@@ -1,0 +1,10 @@
+
+spring:
+  datasource:
+    username: pizza_service
+    password: pizza_service
+    url: jdbc:mysql://localhost:3306/pizza_service?serverTimezone=Europe/London
+
+  jpa:
+    hibernate:
+      ddl-auto: update
