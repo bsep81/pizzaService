@@ -16,13 +16,11 @@ import javax.persistence.Table;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "ingridients")
-public class IngridientEntity {
+@Table(name = "dough_type")
+public class DoughEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private Double price;
-
 }
