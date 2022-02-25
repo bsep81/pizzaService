@@ -14,11 +14,10 @@ class IngridientMapperTest {
 
     @Test
     void shouldMapEntityToIngridient(){
-        IngridientEntity entity = new IngridientEntity(1L, "tomato", 0.59);
+        IngridientEntity entity =  new IngridientEntity(1L, "tomato", 0.59);
         Ingridient ingridient = new Ingridient(1L, "tomato", 0.59);
 
         Optional<Ingridient> result = ingridientMapper.mapEntityToIngridient(entity);
-
         assertTrue(result.isPresent());
         assertEquals(ingridient, result.get());
     }
