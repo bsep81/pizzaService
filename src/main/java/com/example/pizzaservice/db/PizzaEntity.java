@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.util.List;
 
@@ -18,22 +19,19 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "ingridients")
-public class IngridientEntity {
+@Table(name = "pizzas")
+public class PizzaEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String name;
-    private Double price;
+    private Long Id;
+
+    @ManyToOne
+    private DoughEntity dough;
+
+    @ManyToOne
+    private SizeEntity size;
 
     @ManyToMany
-    private List<PizzaEntity> pizzas;
-
-
-    public IngridientEntity(Long id, String name, Double price) {
-        this.id = id;
-        this.name = name;
-        this.price = price;
-    }
+    private List<IngridientEntity> ingridients;
 }
