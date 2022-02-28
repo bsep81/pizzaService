@@ -33,5 +33,5 @@ public class PizzaEntity {
     private SizeEntity size;
 
     @ManyToMany
-    private List<IngridientEntity> ingridients;
+    private List<IngredientEntity> ingridients;
 }

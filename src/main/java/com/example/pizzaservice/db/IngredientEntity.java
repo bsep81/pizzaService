@@ -18,8 +18,8 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "ingridients")
-public class IngridientEntity {
+@Table(name = "ingredients")
+public class IngredientEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,7 +31,7 @@ public class IngridientEntity {
     private List<PizzaEntity> pizzas;
 
 
-    public IngridientEntity(Long id, String name, Double price) {
+    public IngredientEntity(Long id, String name, Double price) {
         this.id = id;
         this.name = name;
         this.price = price;

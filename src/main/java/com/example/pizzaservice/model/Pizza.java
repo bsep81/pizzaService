@@ -17,5 +17,5 @@ public class Pizza {
     private Long Id;
     private Dough dough;
     private Size size;
-    private List<Ingridient> ingridients;
+    private List<Ingredient> ingredients;
 }
