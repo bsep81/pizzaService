@@ -17,7 +17,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class PizzaMapperTest {
 
-    PizzaMapper pizzaMapper = new PizzaMapper();
+    private final DoughMapper doughMapper = new DoughMapper();
+    private final SizeMapper sizeMapper = new SizeMapper();
+    private final IngredientMapper ingredientMapper = new IngredientMapper();
+    private final PizzaMapper pizzaMapper = new PizzaMapper(doughMapper, sizeMapper, ingredientMapper);
+
+
+
 
     @Test
     void shouldMapEntityToPizza(){

@@ -3,15 +3,21 @@ import com.example.pizzaservice.db.OrderEntity;
 import com.example.pizzaservice.db.PizzaEntity;
 import com.example.pizzaservice.model.Order;
 import com.example.pizzaservice.model.Pizza;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@Component
 public class OrderMapper {
 
-    private final PizzaMapper pizzaMapper = new PizzaMapper();
+    private final PizzaMapper pizzaMapper;
+
+    public OrderMapper(PizzaMapper pizzaMapper) {
+        this.pizzaMapper = pizzaMapper;
+    }
 
     public Optional<Order> mapEntityToOrder(OrderEntity entity) {
 
