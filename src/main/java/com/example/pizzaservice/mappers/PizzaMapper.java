@@ -14,9 +14,10 @@ import java.util.stream.Collectors;
 
 public class PizzaMapper {
 
-    DoughMapper doughMapper = new DoughMapper();
-    SizeMapper sizeMapper = new SizeMapper();
-    IngredientMapper ingredientMapper = new IngredientMapper();
+    private final DoughMapper doughMapper = new DoughMapper();
+    private final SizeMapper sizeMapper = new SizeMapper();
+    private final IngredientMapper ingredientMapper = new IngredientMapper();
+
 
     public Optional<Pizza> mapEntityToPizza(PizzaEntity entity) {
         if (entity == null) {
@@ -25,14 +26,15 @@ public class PizzaMapper {
 
         List<Ingredient> ingredients = new ArrayList<>();
 
-        if(!entity.getIngridients().isEmpty()) {
-            ingredients = entity.getIngridients().stream()
+
+        if(!entity.getIngredients().isEmpty()) {
+            ingredients = entity.getIngredients().stream()
                     .map(i -> ingredientMapper.mapEntityToIngredient(i).get())
                     .collect(Collectors.toList());
         }
 
         Pizza pizza = Pizza.builder()
-                .Id(entity.getId())
+                .id(entity.getId())
                 .dough(doughMapper.mapEntityToDough(entity.getDough()).orElse(new Dough()))
                 .size(sizeMapper.mapEntityToSize(entity.getSize()).orElse(new Size()))
                 .ingredients(ingredients)
@@ -47,15 +49,15 @@ public class PizzaMapper {
 
         if(!pizza.getIngredients().isEmpty()) {
             ingredients = pizza.getIngredients().stream()
-                    .map(i -> ingredientMapper.mapIngredientToEntity(i))
+                    .map(ingredientMapper::mapIngredientToEntity)
                     .collect(Collectors.toList());
         }
 
         return  PizzaEntity.builder()
-                .Id(pizza.getId())
+                .id(pizza.getId())
                 .dough(doughMapper.mapDoughToEntity(pizza.getDough()))
                 .size(sizeMapper.mapSizeToEntity(pizza.getSize()))
-                .ingridients(ingredients)
+                .ingredients(ingredients)
                 .build();
     }
 }

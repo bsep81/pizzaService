@@ -23,15 +23,15 @@ class PizzaMapperTest {
     void shouldMapEntityToPizza(){
 
         PizzaEntity entity = PizzaEntity.builder()
-                .Id(1L)
+                .id(1L)
                 .dough(new DoughEntity(2L, "thin"))
                 .size(new SizeEntity(3L, 15))
-                .ingridients(List.of(new IngredientEntity(4L, "ham", 0.34),
+                .ingredients(List.of(new IngredientEntity(4L, "ham", 0.34),
                         new IngredientEntity(5L, "mushroom", 0.23)))
                 .build();
 
         Pizza pizza = Pizza.builder()
-                .Id(1L)
+                .id(1L)
                 .dough(new Dough(2L, "thin"))
                 .size(new Size(3L, 15))
                 .ingredients(List.of(new Ingredient(4L, "ham", 0.34),
@@ -56,15 +56,15 @@ class PizzaMapperTest {
     void shouldMapPizzaToEntity(){
 
         PizzaEntity entity = PizzaEntity.builder()
-                .Id(1L)
+                .id(1L)
                 .dough(new DoughEntity(2L, "thin"))
                 .size(new SizeEntity(3L, 15))
-                .ingridients(List.of(new IngredientEntity(4L, "ham", 0.34),
+                .ingredients(List.of(new IngredientEntity(4L, "ham", 0.34),
                         new IngredientEntity(5L, "mushroom", 0.23)))
                 .build();
 
         Pizza pizza = Pizza.builder()
-                .Id(1L)
+                .id(1L)
                 .dough(new Dough(2L, "thin"))
                 .size(new Size(3L, 15))
                 .ingredients(List.of(new Ingredient(4L, "ham", 0.34),
