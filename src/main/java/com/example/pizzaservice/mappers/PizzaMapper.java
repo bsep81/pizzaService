@@ -6,18 +6,25 @@ import com.example.pizzaservice.model.Dough;
 import com.example.pizzaservice.model.Ingredient;
 import com.example.pizzaservice.model.Pizza;
 import com.example.pizzaservice.model.Size;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@Component
 public class PizzaMapper {
 
-    private final DoughMapper doughMapper = new DoughMapper();
-    private final SizeMapper sizeMapper = new SizeMapper();
-    private final IngredientMapper ingredientMapper = new IngredientMapper();
+    private final DoughMapper doughMapper;
+    private final SizeMapper sizeMapper;
+    private final IngredientMapper ingredientMapper;
 
+    public PizzaMapper(DoughMapper doughMapper, SizeMapper sizeMapper, IngredientMapper ingredientMapper) {
+        this.doughMapper = doughMapper;
+        this.sizeMapper = sizeMapper;
+        this.ingredientMapper = ingredientMapper;
+    }
 
     public Optional<Pizza> mapEntityToPizza(PizzaEntity entity) {
         if (entity == null) {

@@ -2,10 +2,13 @@ package com.example.pizzaservice.mappers;
 
 import com.example.pizzaservice.db.DoughEntity;
 import com.example.pizzaservice.model.Dough;
+import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
+@Component
 public class DoughMapper {
+
     public Optional<Dough> mapEntityToDough(DoughEntity entity) {
 
         if(entity == null){

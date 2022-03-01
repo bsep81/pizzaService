@@ -20,7 +20,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class OrderMapperTest {
 
-    private final OrderMapper orderMapper = new OrderMapper();
+    private final DoughMapper doughMapper = new DoughMapper();
+    private final SizeMapper sizeMapper = new SizeMapper();
+    private final IngredientMapper ingredientMapper = new IngredientMapper();
+    private final PizzaMapper pizzaMapper = new PizzaMapper(doughMapper, sizeMapper, ingredientMapper);
+    private final OrderMapper orderMapper = new OrderMapper(pizzaMapper);
     private Order order = new Order();
     private OrderEntity entity = new OrderEntity();
 
