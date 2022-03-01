@@ -12,12 +12,9 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Pizza {
+public class Order {
 
     private Long id;
-    private Dough dough;
-    private Size size;
-    private List<Ingredient> ingredients;
-
-
+    private String address;
+    private List<Pizza> pizzas;
 }
