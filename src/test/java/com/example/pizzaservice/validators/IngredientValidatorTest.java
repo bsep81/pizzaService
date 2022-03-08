@@ -31,7 +31,7 @@ class IngredientValidatorTest {
 
         List<String> errors = List.of(
                 "Ingredient should have a name.",
-                "Ingredient should have a price"
+                "Ingredient should have a price."
         );
 
         List<String> result = ingredientValidator.isValid(ingredient);
@@ -46,7 +46,7 @@ class IngredientValidatorTest {
                 .price(-2.5)
                 .build();
 
-        List<String> errors = List.of("Price can not be begative. ");
+        List<String> errors = List.of("Price can not be negative.");
 
         List<String> result = ingredientValidator.isValid(ingredient);
 
