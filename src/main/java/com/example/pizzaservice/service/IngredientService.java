@@ -20,6 +20,7 @@ public class IngredientService {
     private final IngredientMapper ingredientMapper;
     private final IngredientValidator ingredientValidator;
     private static final Logger LOG = LoggerFactory.getLogger(IngredientService.class);
+    private static final String INGREDIENT_NOT_FOUND = "Ingredient with id={} not found.";
 
 
     public IngredientService(IngredientRepository ingredientRepository, IngredientMapper ingredientMapper, IngredientValidator ingredientValidator) {
@@ -35,5 +36,15 @@ public class IngredientService {
     }
 
 
+    public Ingredient getIngredientById(long id) {
+        Optional<IngredientEntity> ingredientEntityOptional = ingredientRepository.findById(id);
 
+        if(ingredientEntityOptional.isEmpty()){
+            LOG.info(INGREDIENT_NOT_FOUND, id);
+            return new Ingredient();
+        }
+
+        LOG.info("Ingredient with id={} found.", id);
+        return ingredientMapper.mapEntityToIngredient(ingredientEntityOptional.get()).get();
+    }
 }

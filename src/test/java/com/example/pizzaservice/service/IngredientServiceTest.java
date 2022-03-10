@@ -67,14 +67,14 @@ class IngredientServiceTest {
     void shouldReturnIngredientWithGivenId() {
 
         Ingredient ingredient = new Ingredient(1L, "tomato", 1.5);
-        IngredientEntity entity = new IngredientEntity(1L, "tomato", 1.5);
+        Optional<IngredientEntity> ingredientEntityOptional = Optional.of(new IngredientEntity(1L, "tomato", 1.5));
 
-        when(ingredientRepository.findById(1L)).thenReturn(Optional.of(entity));
+        when(ingredientRepository.findById(1L)).thenReturn(Optional.of(new IngredientEntity(1L, "tomato", 1.5)));
+        when(ingredientMapper.mapEntityToIngredient(ingredientEntityOptional.get())).thenReturn(Optional.of(ingredient));
 
-        Optional<Ingredient> result = ingredientService.getIngredientById(1L);
+        Ingredient result = ingredientService.getIngredientById(1L);
 
-        assertTrue(result.isPresent());
-        assertEquals(ingredient, result.get());
+        assertEquals(ingredient, result);
     }
 
     @Test
@@ -82,9 +82,9 @@ class IngredientServiceTest {
 
         when(ingredientRepository.findById(3L)).thenReturn(Optional.empty());
 
-        Optional<Ingredient> result = ingredientService.getIngredientById(3L);
+        Ingredient result = ingredientService.getIngredientById(3L);
 
-        assertTrue(result.isEmpty());
+        assertEquals(new Ingredient(), result);
     }
 
 
