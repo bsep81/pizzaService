@@ -33,7 +33,7 @@ class IngredientServiceTest {
     private IngredientService ingredientService;
 
     @Test
-    void shouldReturnListOfIngredients(){
+    void shouldReturnListOfIngredients() {
         List<Ingredient> ingredients = new ArrayList<>();
         ingredients.add(new Ingredient(1L, "tomato", 4.6));
         ingredients.add(new Ingredient(2L, "mushroom", 2.1));
@@ -55,7 +55,7 @@ class IngredientServiceTest {
     }
 
     @Test
-    void shouldReturnEmptyListIfNoIngredientsInDB(){
+    void shouldReturnEmptyListIfNoIngredientsInDB() {
         when(ingredientRepository.findAll()).thenReturn(new ArrayList<>());
 
         List<Ingredient> result = ingredientService.getList();
@@ -63,8 +63,29 @@ class IngredientServiceTest {
         assertTrue(result.isEmpty());
     }
 
+    @Test
+    void shouldReturnIngredientWithGivenId() {
 
+        Ingredient ingredient = new Ingredient(1L, "tomato", 1.5);
+        IngredientEntity entity = new IngredientEntity(1L, "tomato", 1.5);
 
+        when(ingredientRepository.findById(1L)).thenReturn(Optional.of(entity));
+
+        Optional<Ingredient> result = ingredientService.getIngredientById(1L);
+
+        assertTrue(result.isPresent());
+        assertEquals(ingredient, result.get());
+    }
+
+    @Test
+    void shouldReturnEmptyOptionalIfIngredientWithGivenIdNotPresentInDB(){
+
+        when(ingredientRepository.findById(3L)).thenReturn(Optional.empty());
+
+        Optional<Ingredient> result = ingredientService.getIngredientById(3L);
+
+        assertTrue(result.isEmpty());
+    }
 
 
 }
