@@ -1,10 +1,12 @@
 package com.example.pizzaservice.service;
 
 import com.example.pizzaservice.db.IngredientEntity;
+import com.example.pizzaservice.exceptions.IngredientException;
 import com.example.pizzaservice.mappers.IngredientMapper;
 import com.example.pizzaservice.model.Ingredient;
 import com.example.pizzaservice.repository.IngredientRepository;
 import com.example.pizzaservice.validators.IngredientValidator;
+import org.apache.logging.log4j.util.Strings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -46,5 +48,17 @@ public class IngredientService {
 
         LOG.info("Ingredient with id={} found.", id);
         return ingredientMapper.mapEntityToIngredient(ingredientEntityOptional.get()).get();
+    }
+
+    public Ingredient save(Ingredient ingredient) {
+        List<String> errors = ingredientValidator.isValid(ingredient);
+        if(!errors.isEmpty()){
+            LOG.info("Ingredient not valid.");
+            throw new IngredientException(Strings.join(errors, ','));
+        }
+
+        IngredientEntity created = ingredientRepository.save(ingredientMapper.mapIngredientToEntity(ingredient));
+        LOG.info("Succesfully saved ingredient {} to database.", ingredient.getName());
+        return ingredientMapper.mapEntityToIngredient(created).get();
     }
 }
