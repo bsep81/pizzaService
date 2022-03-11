@@ -1,6 +1,7 @@
 package com.example.pizzaservice.service;
 
 import com.example.pizzaservice.db.IngredientEntity;
+import com.example.pizzaservice.exceptions.IngredientException;
 import com.example.pizzaservice.mappers.IngredientMapper;
 import com.example.pizzaservice.model.Ingredient;
 import com.example.pizzaservice.repository.IngredientRepository;
@@ -85,6 +86,34 @@ class IngredientServiceTest {
         Ingredient result = ingredientService.getIngredientById(3L);
 
         assertEquals(new Ingredient(), result);
+    }
+
+    @Test
+    void shouldReturnSavedIngredient(){
+        Ingredient ingredient = new Ingredient(1L, "tomato", 1.5);
+        IngredientEntity created = new IngredientEntity(1L, "tomato", 1.5);
+        when(ingredientValidator.isValid(ingredient)).thenReturn(new ArrayList<>());
+        when(ingredientRepository.save(ingredientMapper.mapIngredientToEntity(ingredient))).thenReturn(created);
+        when(ingredientMapper.mapEntityToIngredient(created)).thenReturn(Optional.of(ingredient));
+
+        Ingredient result = ingredientService.save(ingredient);
+
+        assertEquals(ingredient, result);
+    }
+
+    @Test
+    void shouldThrowIngredientExceptionWhenIngredientNotValid(){
+        Ingredient ingredient = Ingredient.builder()
+                .price(-3.3)
+                .build();
+
+        when(ingredientValidator.isValid(ingredient)).thenReturn(List.of(
+                "Ingredient should have a name.",
+                "Price can not be negative."
+        ));
+
+        IngredientException exception = assertThrows(IngredientException.class, () -> ingredientService.save(ingredient));
+        assertEquals("Ingredient should have a name.,Price can not be negative.", exception.getMessage());
     }
 
 
