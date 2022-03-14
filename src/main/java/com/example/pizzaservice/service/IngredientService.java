@@ -6,6 +6,7 @@ import com.example.pizzaservice.mappers.IngredientMapper;
 import com.example.pizzaservice.model.Ingredient;
 import com.example.pizzaservice.repository.IngredientRepository;
 import com.example.pizzaservice.validators.IngredientValidator;
+import lombok.extern.java.Log;
 import org.apache.logging.log4j.util.Strings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,7 +34,7 @@ public class IngredientService {
 
     public List<Ingredient> getList() {
         List<Ingredient> ingredients = new ArrayList<>();
-        ingredientRepository.findAll().forEach(entity -> ingredients.add(ingredientMapper.mapEntityToIngredient(entity).get()));
+        ingredientRepository.findAll().forEach(entity -> ingredients.add(ingredientMapper.mapEntityToIngredient(entity).orElseGet(Ingredient::new)));
         return ingredients;
     }
 
@@ -47,7 +48,7 @@ public class IngredientService {
         }
 
         LOG.info("Ingredient with id={} found.", id);
-        return ingredientMapper.mapEntityToIngredient(ingredientEntityOptional.get()).get();
+        return ingredientMapper.mapEntityToIngredient(ingredientEntityOptional.get()).orElseGet(Ingredient::new);
     }
 
     public Ingredient save(Ingredient ingredient) {
@@ -60,5 +61,13 @@ public class IngredientService {
         IngredientEntity created = ingredientRepository.save(ingredientMapper.mapIngredientToEntity(ingredient));
         LOG.info("Succesfully saved ingredient {} to database.", ingredient.getName());
         return ingredientMapper.mapEntityToIngredient(created).get();
+    }
+
+    public void deleteIngredient(Long id){
+        Optional<IngredientEntity> ingredientEntityOptional = ingredientRepository.findById(id);
+        ingredientEntityOptional.ifPresentOrElse(ingredientEntity -> {
+            ingredientRepository.delete(ingredientEntity);
+            LOG.info("Ingredient with id {} removed from database.", id);
+        }, () -> LOG.info(INGREDIENT_NOT_FOUND, id));
     }
 }
