@@ -70,4 +70,13 @@ public class IngredientService {
             LOG.info("Ingredient with id {} removed from database.", id);
         }, () -> LOG.info(INGREDIENT_NOT_FOUND, id));
     }
+
+    private Ingredient update(Ingredient ingredient){
+        if(ingredient.getId() != null && ingredientRepository.findById(ingredient.getId()).isPresent()){
+            return save(ingredient);
+        }
+
+        LOG.info(INGREDIENT_NOT_FOUND, ingredient.getId());
+        return null;
+    }
 }
