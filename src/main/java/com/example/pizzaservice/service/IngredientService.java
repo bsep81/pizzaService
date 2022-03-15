@@ -6,7 +6,6 @@ import com.example.pizzaservice.mappers.IngredientMapper;
 import com.example.pizzaservice.model.Ingredient;
 import com.example.pizzaservice.repository.IngredientRepository;
 import com.example.pizzaservice.validators.IngredientValidator;
-import lombok.extern.java.Log;
 import org.apache.logging.log4j.util.Strings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -71,7 +70,7 @@ public class IngredientService {
         }, () -> LOG.info(INGREDIENT_NOT_FOUND, id));
     }
 
-    private Ingredient update(Ingredient ingredient){
+    public Ingredient update(Ingredient ingredient){
         if(ingredient.getId() != null && ingredientRepository.findById(ingredient.getId()).isPresent()){
             return save(ingredient);
         }
