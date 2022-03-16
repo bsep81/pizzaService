@@ -60,7 +60,4 @@ public class IngredientController {
         LOG.info("Attempting to update ingredient with id {}.", ingredient.getId());
         return ingredientService.update(ingredient);
     }
-
-
-
 }
