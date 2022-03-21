@@ -19,5 +19,4 @@ public class Pizza {
     private Size size;
     private List<Ingredient> ingredients;
 
-
 }
