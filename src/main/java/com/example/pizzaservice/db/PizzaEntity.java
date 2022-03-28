@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -26,12 +27,12 @@ public class PizzaEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private DoughEntity dough;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private SizeEntity size;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     private List<IngredientEntity> ingredients;
 }
