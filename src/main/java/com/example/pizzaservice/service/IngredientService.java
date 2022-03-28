@@ -54,7 +54,7 @@ public class IngredientService {
         List<String> errors = ingredientValidator.isValid(ingredient);
         if(!errors.isEmpty()){
             LOG.info("Ingredient not valid.");
-            throw new IngredientException(Strings.join(errors, ','));
+            throw new IngredientException(Strings.join(errors, ' '));
         }
 
         IngredientEntity created = ingredientRepository.save(ingredientMapper.mapIngredientToEntity(ingredient));
