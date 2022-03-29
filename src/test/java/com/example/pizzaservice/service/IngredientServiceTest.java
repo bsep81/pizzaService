@@ -104,7 +104,7 @@ class IngredientServiceTest {
     @Test
     void shouldThrowIngredientExceptionWhenIngredientNotValid(){
         Ingredient ingredient = Ingredient.builder()
-                .price(-3.3)
+                .basePrice(-3.3)
                 .build();
 
         when(ingredientValidator.isValid(ingredient)).thenReturn(List.of(
@@ -113,7 +113,7 @@ class IngredientServiceTest {
         ));
 
         IngredientException exception = assertThrows(IngredientException.class, () -> ingredientService.save(ingredient));
-        assertEquals("Ingredient should have a name.,Price can not be negative.", exception.getMessage());
+        assertEquals("Ingredient should have a name. Price can not be negative.", exception.getMessage());
     }
 
 

@@ -42,7 +42,7 @@ class PizzaServiceTest {
     void shouldReturnListOfPizzas(){
         Pizza pizza1 = Pizza.builder()
                 .id(5L)
-                .dough(new Dough(1L, "thin"))
+                .dough(new Dough(1L, "thin", 2.2))
                 .size(new Size(2L, 12))
                 .ingredients(List.of(new Ingredient(3L, "tomato", 2.2),
                         new Ingredient(4L, "mushroom", 1.1)))
@@ -50,7 +50,7 @@ class PizzaServiceTest {
 
         Pizza pizza2 = Pizza.builder()
                 .id(6L)
-                .dough(new Dough(7L, "thick"))
+                .dough(new Dough(7L, "thick", 2.2))
                 .size(new Size(8L, 14))
                 .ingredients(List.of(new Ingredient(3L, "tomato", 2.2),
                         new Ingredient(9L, "salami", 3.1),
@@ -85,7 +85,7 @@ class PizzaServiceTest {
     void shouldReturnPizzaWithGivenId(){
         Pizza pizza = Pizza.builder()
                 .id(5L)
-                .dough(new Dough(1L, "thin"))
+                .dough(new Dough(1L, "thin", 2.2))
                 .size(new Size(2L, 12))
                 .ingredients(List.of(new Ingredient(3L, "tomato", 2.2),
                         new Ingredient(4L, "mushroom", 1.1)))
@@ -93,7 +93,7 @@ class PizzaServiceTest {
 
         Optional<PizzaEntity> pizzaEntityOptional = Optional.of(PizzaEntity.builder()
                 .id(5L)
-                .dough(new DoughEntity(1L, "thin"))
+                .dough(new DoughEntity(1L, "thin", 2.2))
                 .size(new SizeEntity(2L, 12))
                 .ingredients(List.of(new IngredientEntity(3L, "tomato", 2.2),
                         new IngredientEntity(4L, "mushroom", 1.1)))
@@ -101,7 +101,7 @@ class PizzaServiceTest {
 
         when(pizzaRepository.findById(5L)).thenReturn(Optional.of(PizzaEntity.builder()
                 .id(5L)
-                .dough(new DoughEntity(1L, "thin"))
+                .dough(new DoughEntity(1L, "thin", 2.2))
                 .size(new SizeEntity(2L, 12))
                 .ingredients(List.of(new IngredientEntity(3L, "tomato", 2.2),
                         new IngredientEntity(4L, "mushroom", 1.1)))
@@ -126,7 +126,7 @@ class PizzaServiceTest {
     void shouldReturnSavedPizza(){
         Pizza pizza = Pizza.builder()
                 .id(5L)
-                .dough(new Dough(1L, "thin"))
+                .dough(new Dough(1L, "thin", 2.2))
                 .size(new Size(2L, 12))
                 .ingredients(List.of(new Ingredient(3L, "tomato", 2.2),
                         new Ingredient(4L, "mushroom", 1.1)))
@@ -134,7 +134,7 @@ class PizzaServiceTest {
 
         PizzaEntity created = PizzaEntity.builder()
                 .id(5L)
-                .dough(new DoughEntity(1L, "thin"))
+                .dough(new DoughEntity(1L, "thin", 2.2))
                 .size(new SizeEntity(2L, 12))
                 .ingredients(List.of(new IngredientEntity(3L, "tomato", 2.2),
                         new IngredientEntity(4L, "mushroom", 1.1)))

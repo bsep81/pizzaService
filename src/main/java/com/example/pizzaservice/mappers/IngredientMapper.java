@@ -18,7 +18,7 @@ public class IngredientMapper {
         Ingredient ingredient = Ingredient.builder()
                 .id(entity.getId())
                 .name(entity.getName())
-                .price(entity.getPrice())
+                .basePrice(entity.getPrice())
                 .build();
 
         return Optional.of(ingredient);
@@ -28,7 +28,7 @@ public class IngredientMapper {
         return IngredientEntity.builder()
                 .id(ingredient.getId())
                 .name(ingredient.getName())
-                .price(ingredient.getPrice())
+                .price(ingredient.getBasePrice())
                 .build();
     }
 }

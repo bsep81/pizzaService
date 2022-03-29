@@ -17,9 +17,9 @@ public class IngredientValidator {
             errors.add("Ingredient should have a name.");
         }
 
-        if(ingredient.getPrice() == null){
+        if(ingredient.getBasePrice() == null){
             errors.add("Ingredient should have a price.");
-        }else if(ingredient.getPrice() < 0){
+        }else if(ingredient.getBasePrice() < 0){
             errors.add("Price can not be negative.");
         }
 
