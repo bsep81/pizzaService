@@ -32,6 +32,7 @@ class PizzaValidatorTest {
     @Test
     void shouldReturnEmptyListWhenPizzaIsValid() {
         Pizza pizza = new Pizza(10L,
+                "margerita",
                 new Dough(1L, "thin", 2.2),
                 new Size(2L, 14),
                 List.of(
@@ -55,6 +56,7 @@ class PizzaValidatorTest {
         Pizza pizza = new Pizza();
         List<String> errors = List.of(
                 "No dough chosen.",
+                "Pizza should have a name.",
                 "No size chosen.",
                 "No ingredients chosen."
         );
@@ -67,6 +69,7 @@ class PizzaValidatorTest {
     @Test
     void shouldReturnListOfErrorsWhenFieldsOfPizzaNotValid(){
         Pizza pizza = new Pizza(10L,
+                "",
                 new Dough(1L, "", -2.1),
                 new Size(2L, 2),
                 List.of(
@@ -76,6 +79,7 @@ class PizzaValidatorTest {
         List<String> errors = List.of(
                 "Dough should have a name.",
                 "Dough should have a price",
+                "Pizza should have a name.",
                 "Pizza to small.",
                 "Not enough ingredients.",
                 "Ingredient should have a name.",

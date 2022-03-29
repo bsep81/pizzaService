@@ -15,6 +15,7 @@ import java.util.List;
 public class Pizza {
 
     private Long id;
+    private String name;
     private Dough dough;
     private Size size;
     private List<Ingredient> ingredients;

@@ -29,6 +29,10 @@ public class PizzaValidator {
             errors.addAll(doughValidator.isValid(pizza.getDough()));
         }
 
+        if(pizza.getName() == null || pizza.getName().isEmpty()){
+            errors.add("Pizza should have a name.");
+        }
+
         if(pizza.getSize() == null){
             errors.add("No size chosen.");
         }else if(!sizeValidator.isValid(pizza.getSize()).isEmpty()){
