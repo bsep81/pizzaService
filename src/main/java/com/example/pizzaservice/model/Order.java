@@ -17,4 +17,8 @@ public class Order {
     private Long id;
     private String address;
     private List<Pizza> pizzas;
+
+    public Double getPrice(){
+        return pizzas.stream().mapToDouble(Pizza::getPrice).sum();
+    }
 }
