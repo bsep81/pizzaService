@@ -18,6 +18,7 @@ public class DoughMapper {
         Dough dough = Dough.builder()
                 .id(entity.getId())
                 .name(entity.getName())
+                .basePrice(entity.getBasePrice())
                 .build();
 
         return Optional.of(dough);
@@ -28,6 +29,7 @@ public class DoughMapper {
         return DoughEntity.builder()
                 .id(dough.getId())
                 .name(dough.getName())
+                .basePrice(dough.getBasePrice())
                 .build();
     }
 }

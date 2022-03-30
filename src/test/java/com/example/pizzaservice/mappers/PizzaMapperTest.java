@@ -31,7 +31,7 @@ class PizzaMapperTest {
 
         PizzaEntity entity = PizzaEntity.builder()
                 .id(1L)
-                .dough(new DoughEntity(2L, "thin"))
+                .dough(new DoughEntity(2L, "thin", 2.2))
                 .size(new SizeEntity(3L, 15))
                 .ingredients(List.of(new IngredientEntity(4L, "ham", 0.34),
                         new IngredientEntity(5L, "mushroom", 0.23)))
@@ -39,7 +39,7 @@ class PizzaMapperTest {
 
         Pizza pizza = Pizza.builder()
                 .id(1L)
-                .dough(new Dough(2L, "thin"))
+                .dough(new Dough(2L, "thin", 2.2))
                 .size(new Size(3L, 15))
                 .ingredients(List.of(new Ingredient(4L, "ham", 0.34),
                         new Ingredient(5L, "mushroom", 0.23)))
@@ -64,7 +64,7 @@ class PizzaMapperTest {
 
         PizzaEntity entity = PizzaEntity.builder()
                 .id(1L)
-                .dough(new DoughEntity(2L, "thin"))
+                .dough(new DoughEntity(2L, "thin", 2.2))
                 .size(new SizeEntity(3L, 15))
                 .ingredients(List.of(new IngredientEntity(4L, "ham", 0.34),
                         new IngredientEntity(5L, "mushroom", 0.23)))
@@ -72,7 +72,7 @@ class PizzaMapperTest {
 
         Pizza pizza = Pizza.builder()
                 .id(1L)
-                .dough(new Dough(2L, "thin"))
+                .dough(new Dough(2L, "thin", 2.2))
                 .size(new Size(3L, 15))
                 .ingredients(List.of(new Ingredient(4L, "ham", 0.34),
                         new Ingredient(5L, "mushroom", 0.23)))

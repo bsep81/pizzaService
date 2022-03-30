@@ -6,6 +6,7 @@ import com.example.pizzaservice.mappers.DoughMapper;
 import com.example.pizzaservice.model.Dough;
 import com.example.pizzaservice.repository.DoughRepository;
 import com.example.pizzaservice.validators.DoughValidator;
+import org.apache.logging.log4j.util.Strings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -50,10 +51,10 @@ public class DoughService {
 
 
     public Dough save(Dough dough) {
-        String error = doughValidator.isValid(dough);
-        if(!error.isEmpty()){
+        List<String> errors = doughValidator.isValid(dough);
+        if(!errors.isEmpty()){
             LOG.info("Dough not valid.");
-            throw new DoughException(error);
+            throw new DoughException(Strings.join(errors, ' '));
         }
 
         DoughEntity created = doughRepository.save(doughMapper.mapDoughToEntity(dough));

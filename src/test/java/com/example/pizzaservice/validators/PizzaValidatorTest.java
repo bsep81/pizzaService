@@ -32,7 +32,8 @@ class PizzaValidatorTest {
     @Test
     void shouldReturnEmptyListWhenPizzaIsValid() {
         Pizza pizza = new Pizza(10L,
-                new Dough(1L, "thin"),
+                "margerita",
+                new Dough(1L, "thin", 2.2),
                 new Size(2L, 14),
                 List.of(
                         new Ingredient(3L, "tomato", 2.3),
@@ -40,7 +41,7 @@ class PizzaValidatorTest {
                 ));
 
 
-        when(doughValidator.isValid(pizza.getDough())).thenReturn("");
+        when(doughValidator.isValid(pizza.getDough())).thenReturn(new ArrayList<>());
         when(sizeValidator.isValid(pizza.getSize())).thenReturn("");
         when(ingredientValidator.isValid(pizza.getIngredients().get(0))).thenReturn(new ArrayList<>());
         when(ingredientValidator.isValid(pizza.getIngredients().get(1))).thenReturn(new ArrayList<>());
@@ -55,6 +56,7 @@ class PizzaValidatorTest {
         Pizza pizza = new Pizza();
         List<String> errors = List.of(
                 "No dough chosen.",
+                "Pizza should have a name.",
                 "No size chosen.",
                 "No ingredients chosen."
         );
@@ -67,7 +69,8 @@ class PizzaValidatorTest {
     @Test
     void shouldReturnListOfErrorsWhenFieldsOfPizzaNotValid(){
         Pizza pizza = new Pizza(10L,
-                new Dough(1L, ""),
+                "",
+                new Dough(1L, "", -2.1),
                 new Size(2L, 2),
                 List.of(
                         new Ingredient(3L, "", -2.3)
@@ -75,13 +78,16 @@ class PizzaValidatorTest {
 
         List<String> errors = List.of(
                 "Dough should have a name.",
+                "Dough should have a price",
+                "Pizza should have a name.",
                 "Pizza to small.",
                 "Not enough ingredients.",
                 "Ingredient should have a name.",
                 "Price can not be negative."
         );
 
-        when(doughValidator.isValid(pizza.getDough())).thenReturn("Dough should have a name.");
+        when(doughValidator.isValid(pizza.getDough())).thenReturn(List.of("Dough should have a name.",
+                "Dough should have a price"));
         when(sizeValidator.isValid(pizza.getSize())).thenReturn("Pizza to small.");
         when(ingredientValidator.isValid(pizza.getIngredients().get(0))).thenReturn(List.of(
                 "Ingredient should have a name.",

@@ -36,9 +36,9 @@ class DoughServiceTest {
     @Test
     void shouldReturnListOfDoughs() {
         List<Dough> doughs = new ArrayList<>();
-        doughs.add(new Dough(1L, "thin"));
-        doughs.add(new Dough(2L, "medium"));
-        doughs.add(new Dough(3L, "thick"));
+        doughs.add(new Dough(1L, "thin", 2.2));
+        doughs.add(new Dough(2L, "medium", 2.2));
+        doughs.add(new Dough(3L, "thick", 2.2));
 
         when(doughRepository.findAll()).thenReturn(Arrays.asList(
                 DoughEntity.builder().id(1L).build(),
@@ -46,9 +46,9 @@ class DoughServiceTest {
                 DoughEntity.builder().id(3L).build()
         ));
 
-        when(doughMapper.mapEntityToDough(DoughEntity.builder().id(1L).build())).thenReturn(Optional.of(new Dough(1L, "thin")));
-        when(doughMapper.mapEntityToDough(DoughEntity.builder().id(2L).build())).thenReturn(Optional.of(new Dough(2L, "medium")));
-        when(doughMapper.mapEntityToDough(DoughEntity.builder().id(3L).build())).thenReturn(Optional.of(new Dough(3L, "thick")));
+        when(doughMapper.mapEntityToDough(DoughEntity.builder().id(1L).build())).thenReturn(Optional.of(new Dough(1L, "thin", 2.2)));
+        when(doughMapper.mapEntityToDough(DoughEntity.builder().id(2L).build())).thenReturn(Optional.of(new Dough(2L, "medium", 2.2)));
+        when(doughMapper.mapEntityToDough(DoughEntity.builder().id(3L).build())).thenReturn(Optional.of(new Dough(3L, "thick", 2.2)));
 
         List<Dough> result = doughService.getList();
 
@@ -66,10 +66,10 @@ class DoughServiceTest {
 
     @Test
     void shouldReturnDoughWithGivenId() {
-        Dough dough = new Dough(1L, "thin");
-        Optional<DoughEntity> doughEntityOptional = Optional.of(new DoughEntity(1L, "thin"));
+        Dough dough = new Dough(1L, "thin", 2.2);
+        Optional<DoughEntity> doughEntityOptional = Optional.of(new DoughEntity(1L, "thin", 2.2));
 
-        when(doughRepository.findById(1L)).thenReturn(Optional.of(new DoughEntity(1L, "thin")));
+        when(doughRepository.findById(1L)).thenReturn(Optional.of(new DoughEntity(1L, "thin", 2.2)));
         when(doughMapper.mapEntityToDough(doughEntityOptional.get())).thenReturn(Optional.of(dough));
 
         Dough result = doughService.getDoughById(1L);
@@ -88,10 +88,10 @@ class DoughServiceTest {
 
     @Test
     void shouldReturnSavedDough(){
-        Dough dough = new Dough(1L, "thin");
-        DoughEntity created = new DoughEntity(1L, "thin");
+        Dough dough = new Dough(1L, "thin", 2.2);
+        DoughEntity created = new DoughEntity(1L, "thin", 2.2);
 
-        when(doughValidator.isValid(dough)).thenReturn("");
+        when(doughValidator.isValid(dough)).thenReturn(new ArrayList<>());
         when(doughRepository.save(doughMapper.mapDoughToEntity(dough))).thenReturn(created);
         when(doughMapper.mapEntityToDough(created)).thenReturn(Optional.of(dough));
 
@@ -104,7 +104,7 @@ class DoughServiceTest {
     void shouldThrowDoughExceptionWhenDoughNotValid(){
         Dough dough = new Dough();
 
-        when(doughValidator.isValid(dough)).thenReturn("Dough should have a name.");
+        when(doughValidator.isValid(dough)).thenReturn(List.of("Dough should have a name."));
 
         DoughException exception = assertThrows(DoughException.class, () -> doughService.save(dough));
         assertEquals("Dough should have a name.", exception.getMessage());

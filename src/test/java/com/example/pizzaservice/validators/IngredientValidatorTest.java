@@ -15,7 +15,7 @@ class IngredientValidatorTest {
     void shouldReturnEmptyListIfIngredientIsValid(){
         Ingredient ingredient = Ingredient.builder()
                 .name("tomato")
-                .price(0.55)
+                .basePrice(0.55)
                 .build();
 
         List<String> result = ingredientValidator.isValid(ingredient);
@@ -43,7 +43,7 @@ class IngredientValidatorTest {
     void shouldReturnAdequateErrorIfPriceIsNegative(){
         Ingredient ingredient = Ingredient.builder()
                 .name("tomato")
-                .price(-2.5)
+                .basePrice(-2.5)
                 .build();
 
         List<String> errors = List.of("Price can not be negative.");

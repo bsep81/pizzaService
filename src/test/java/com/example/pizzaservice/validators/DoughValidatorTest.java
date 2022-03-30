@@ -3,6 +3,8 @@ package com.example.pizzaservice.validators;
 import com.example.pizzaservice.model.Dough;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class DoughValidatorTest {
@@ -13,9 +15,10 @@ class DoughValidatorTest {
     void shouldReturnEmptyStringIfDoughIsValid(){
         Dough dough = Dough.builder()
                 .name("thin")
+                .basePrice(2.2)
                 .build();
 
-        String result = doughValidator.isValid(dough);
+        List<String> result = doughValidator.isValid(dough);
 
         assertTrue(result.isEmpty());
     }
@@ -24,11 +27,12 @@ class DoughValidatorTest {
     void shouldReturnStringWithErrorMessageIfDoughIsNotVAlid(){
         Dough dough = new Dough();
 
-        String error = "Dough should have a name.";
+        List<String> errors = List.of("Dough should have a name.",
+                "Dough should have a price");
 
-        String result = doughValidator.isValid(dough);
+        List<String> result = doughValidator.isValid(dough);
 
-        assertEquals(error, result);
+        assertIterableEquals(errors, result);
     }
 
 }

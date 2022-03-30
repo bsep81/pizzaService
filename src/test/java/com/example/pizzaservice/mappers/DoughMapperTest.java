@@ -13,9 +13,9 @@ class DoughMapperTest {
     private final DoughMapper doughMapper = new DoughMapper();
 
     @Test
-    void shouldMapEntityToDough(){
-        DoughEntity entity = new DoughEntity(1L, "thin");
-        Dough dough = new Dough(1L, "thin");
+    void shouldMapEntityToDough() {
+        DoughEntity entity = new DoughEntity(1L, "thin", 2.2);
+        Dough dough = new Dough(1L, "thin", 2.2);
 
         Optional<Dough> result = doughMapper.mapEntityToDough(entity);
 
@@ -24,7 +24,7 @@ class DoughMapperTest {
     }
 
     @Test
-    void shouldReturnEmptyOptionalIfNullEntity(){
+    void shouldReturnEmptyOptionalIfNullEntity() {
 
         Optional<Dough> result = doughMapper.mapEntityToDough(null);
 
@@ -32,16 +32,15 @@ class DoughMapperTest {
     }
 
     @Test
-    void shouldMapDoughToEntity(){
+    void shouldMapDoughToEntity() {
 
-        Dough dough = new Dough(2L, "thin");
-        DoughEntity doughEntity = new DoughEntity(2L, "thin");
+        Dough dough = new Dough(2L, "thin", 2.2);
+        DoughEntity doughEntity = new DoughEntity(2L, "thin", 2.2);
 
         DoughEntity result = doughMapper.mapDoughToEntity(dough);
 
         assertEquals(doughEntity, result);
     }
-
 
 
 }

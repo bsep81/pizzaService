@@ -13,6 +13,7 @@ public class Dough {
 
     private Long id;
     private String name;
+    private Double basePrice;
 
 
 }

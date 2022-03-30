@@ -13,7 +13,7 @@ public class Ingredient {
 
     private Long id;
     private String name;
-    private Double price;
+    private Double basePrice;
 
 
 }

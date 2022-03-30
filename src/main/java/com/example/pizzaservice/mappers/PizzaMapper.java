@@ -42,6 +42,7 @@ public class PizzaMapper {
 
         Pizza pizza = Pizza.builder()
                 .id(entity.getId())
+                .name(entity.getName())
                 .dough(doughMapper.mapEntityToDough(entity.getDough()).orElse(new Dough()))
                 .size(sizeMapper.mapEntityToSize(entity.getSize()).orElse(new Size()))
                 .ingredients(ingredients)
@@ -62,6 +63,7 @@ public class PizzaMapper {
 
         return  PizzaEntity.builder()
                 .id(pizza.getId())
+                .name(pizza.getName())
                 .dough(doughMapper.mapDoughToEntity(pizza.getDough()))
                 .size(sizeMapper.mapSizeToEntity(pizza.getSize()))
                 .ingredients(ingredients)
