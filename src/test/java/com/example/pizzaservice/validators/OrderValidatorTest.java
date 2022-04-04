@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class OrderValidatorTest {
 
-    private OrderValidator orderValidator = new OrderValidator();
+    private final OrderValidator orderValidator = new OrderValidator();
 
     @Test
     void shouldReturnEmtyListIfOrderIssValid(){

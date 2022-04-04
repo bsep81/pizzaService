@@ -37,7 +37,7 @@ public class PizzaService {
         return pizzas;
     }
 
-    public Pizza findById(long id) {
+    public Pizza findById(Long id) {
         Optional<PizzaEntity> pizzaEntityOptional = pizzaRepository.findById(id);
 
         if (pizzaEntityOptional.isEmpty()) {
@@ -58,7 +58,7 @@ public class PizzaService {
         }
 
         PizzaEntity created = pizzaRepository.save(pizzaMapper.mapPizzaToEntity(pizza));
-        LOG.info("Succesfully saned pizza {} to database", pizza.getId());
+        LOG.info("Successfully saved pizza with id={} to database", pizza.getId());
         return pizzaMapper.mapEntityToPizza(created).get();
     }
 

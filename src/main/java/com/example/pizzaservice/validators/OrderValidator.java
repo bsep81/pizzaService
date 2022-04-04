@@ -1,10 +1,12 @@
 package com.example.pizzaservice.validators;
 
 import com.example.pizzaservice.model.Order;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class OrderValidator {
 
     public List<String> isValid(Order order){
